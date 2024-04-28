@@ -30,16 +30,8 @@ mv -n bin/country.sys _output/gcc/.
 mv -n share/src/share.com _output/gcc/.
 mv -n share/src/share.map _output/gcc/.
 
-# Watcom
-if [ ! -d _watcom ] ; then
-  [ -f $OWTAR ] || wget --no-verbose https://github.com/open-watcom/open-watcom-v2/releases/download/2023-02-01-Build/$OWTAR
-
-  mkdir _watcom
-  (cd _watcom && tar -xf ../$OWTAR)
-fi
-
-export PATH=$BUILD_DIR/bin:$PATH:$BUILD_DIR/_watcom/binl64
-export WATCOM=$BUILD_DIR/_watcom
+export WATCOM=${HOME}/.dosemu/drive_c/watcom
+export PATH=$BUILD_DIR/bin:$PATH:$WATCOM/binl64
 
 mkdir _output/wc
 git clean -x -d -f -e test -e _output -e _downloads -e _watcom -e $OWTAR
@@ -68,13 +60,13 @@ mkdir _output/wc_dos
 git clean -x -d -f -e test -e _output -e _downloads -e _watcom -e $OWTAR
 {
   echo set COMPILER=WATCOM
-  echo set WATCOM='C:\\devel\\watcomc'
+  echo set WATCOM='C:\\watcom'
   echo set MAKE=wmake /ms
   echo set XCPU=386
   echo set XFAT=32
   echo set XNASM='C:\\devel\\nasm\\nasm'
   echo set OLDPATH=%PATH%
-  echo set PATH='C:\\devel\\watcomc\\binw;C:\\bin;%OLDPATH%'
+  echo set PATH='C:\\watcom\\binw;C:\\bin;%OLDPATH%'
 } | unix2dos > config.bat
 
 dosemu -td -q -K . -E "build.bat"

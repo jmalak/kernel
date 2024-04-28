@@ -46,13 +46,16 @@ DEVEL=${IBIBLIO_PATH}/devel
 #[ -f i16butil.zip ] || wget --no-verbose ${DEVEL}/i16butil.zip
 #[ -f i16lbi86.zip ] || wget --no-verbose ${DEVEL}/i16lbi86.zip
 
-#   get watcom for DOS
-[ -f watcomc.zip ] || wget --no-verbose ${DEVEL}/watcomc.zip
+OWTAR=ow-snapshot.tar.xz
+
+#   get watcom binary snapshot
+[ -f $OWTAR ] || wget --no-verbose https://github.com/open-watcom/open-watcom-v2/releases/download/Last-CI-build/$OWTAR
 
 mkdir -p ${HOME}/.dosemu/drive_c
 cd ${HOME}/.dosemu/drive_c && (
 
   mkdir -p bin
+  mkdir -p watcom
 
   # Boot files
   unzip -L -q ${HERE}/kernel.zip
@@ -77,6 +80,6 @@ cd ${HOME}/.dosemu/drive_c && (
 #  unzip -L -q ${HERE}/i16lbi86.zip
 #  echo PATH to ia16 binaries is 'c:/devel/i16gnu/bin'
 
-  unzip -L -q ${HERE}/watcomc.zip
-  echo PATH to watcom binaries is 'c:/devel/watcomc/binw'
+  (cd watcom && tar -xf ${HERE}/$OWTAR)
+  echo PATH to watcom binaries is 'c:/watcom/binw'
 )
