@@ -80,6 +80,6 @@ cd ${HOME}/.dosemu/drive_c && (
 #  unzip -L -q ${HERE}/i16lbi86.zip
 #  echo PATH to ia16 binaries is 'c:/devel/i16gnu/bin'
 
-  (cd watcom && tar -xf ${HERE}/$OWTAR)
+  (cd watcom && tar -xvf ${HERE}/$OWTAR)
   echo PATH to watcom binaries is 'c:/watcom/binw'
 )
