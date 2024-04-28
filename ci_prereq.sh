@@ -49,7 +49,7 @@ DEVEL=${IBIBLIO_PATH}/devel
 OWTAR=ow-snapshot.tar.xz
 
 #   get watcom binary snapshot
-[ -f $OWTAR ] || wget --no-verbose https://github.com/open-watcom/open-watcom-v2/releases/download/Last-CI-build/$OWTAR
+[ -f $OWTAR ] || wget https://github.com/open-watcom/open-watcom-v2/releases/download/Last-CI-build/$OWTAR
 
 mkdir -p ${HOME}/.dosemu/drive_c
 cd ${HOME}/.dosemu/drive_c && (
